@@ -1,61 +1,61 @@
 # LLM Note Generator
 
-这是一个用于将课程幻灯片 (PDF) 和配套讲课字幕 (TXT) 半自动化转换为专业的 LaTeX 课程笔记的工具集。通过自动提取、转换并构建包含严格模板约束的 Prompt，帮助您利用大语言模型 (如 Gemini, ChatGPT) 快速生成高质量的结构化笔记。
+A toolset designed to semi-automatically convert course presentation slides (PDF) and their corresponding lecture subtitles (TXT) into professional LaTeX course notes. By automatically extracting, converting, and building a strictly templated Prompt, this tool helps you leverage Large Language Models (like Gemini, ChatGPT) to quickly generate high-quality, structured notes.
 
-## 包含文件
+## Included Files
 
-*   **`prompt.py`**: 核心处理脚本。负责将 PDF 转换为多张图片存入目录、读取 TXT 字幕内容，生成富含复杂指令和 LaTeX 模板的提示词 (Prompt)，并自动复制到系统剪贴板。
-*   **`clean.sh`**: 归档清理脚本。完成一次笔记生成后，一键将当前目录的 PDF、TXT 素材、生成的 TEX 文件以及图片目录归档到特定命名的文件夹中，保持工作区整洁。
+*   **`prompt.py`**: The core processing script. It handles converting the PDF into multiple images stored in a directory, reading the TXT subtitle content, generating a complex Prompt rich with instructions and a LaTeX template, and automatically copying it to your system clipboard.
+*   **`clean.sh`**: The archiving and cleanup script. After a note generation session is complete, it single-handedly archives the current directory's PDF, TXT materials, generated TEX file, and the image directory into a specifically named folder, keeping your workspace tidy.
 
-## 环境依赖
+## Prerequisites
 
-在使用之前，需要确保已安装相关的依赖：
+Before using, ensure you have the necessary dependencies installed:
 
-1.  **Python 库**:
+1.  **Python Libraries**:
     ```bash
     pip install pdf2image pyperclip
     ```
-2.  **系统依赖 (用于 PDF 转图片)**:
-    对于 macOS 用户，需要安装 `poppler`：
+2.  **System Dependencies (for PDF to image conversion)**:
+    For macOS users, you need to install `poppler`:
     ```bash
     brew install poppler
     ```
-    对于 Ubuntu/Debian：
+    For Ubuntu/Debian:
     ```bash
     sudo apt-get install poppler-utils
     ```
 
-## 使用指南
+## Usage Guide
 
-### 步骤 1：准备材料
-将您要处理的**单份**课程讲义 PDF 文件和其对应的文本字幕文件 (`.txt`) 放在当前工作目录中（即此脚本所在目录）。
-> **注意**：请确保目录下只有一个 `.pdf` 文件和一个 `.txt` 文件，否则脚本会报错提示。
+### Step 1: Preparation
+Place the **single** course presentation PDF file and its corresponding text subtitle file (`.txt`) you want to process into the current working directory (where these scripts are located).
+> **Note**: Please ensure there is only *one* `.pdf` file and *one* `.txt` file in the directory; otherwise, the script will throw an error.
 
-### 步骤 2：生成 Prompt (运行 `prompt.py`)
-在终端中执行以下命令：
+### Step 2: Generate Prompt (Run `prompt.py`)
+Execute the following command in your terminal:
 ```bash
 python prompt.py
 ```
-**`prompt.py` 内部执行流程**：
-1. 查找并识别 PDF 和 TXT 文件。
-2. 检查源图片资源：如不存在 `pic` 文件夹，则自动创建并将 PDF 逐次转换为 PNG 图片（这可能需要数十秒）；如已存在 `pic`，则复用以节省时间。
-3. 读取字幕内容并合并进内部预设的结构化 Prompt 模板中。
-4. 提示生成成功，并将结果**自动复制到您的系统剪切板**中。
+**Internal workflow of `prompt.py`**:
+1. Locates and identifies the PDF and TXT files.
+2. Checks for source image resources: If a `pic` folder doesn't exist, it automatically creates one and converts the PDF into PNG images page by page (this may take a few dozen seconds). If `pic` already exists, it reuses it to save time.
+3. Reads the subtitle content and merges it into the pre-configured structured Prompt template.
+4. Notifies you of successful generation and **automatically copies the result to your system clipboard**.
 
-### 步骤 3：使用大语言模型生成 LaTeX 笔记
-1. 在浏览器中打开支持文档解析的 AI 工具（例如 Gemini Advanced 或 ChatGPT 网页版）。
-2. 在该对话中**上传您的 PDF 讲义文件**。
-3. 在文本输入框中按下 **粘贴 (Cmd+V / Ctrl+V)**，并发送给 AI 模型。
-4. 模型将根据指令返回排版优美、包含您自定义的组件（如“核心概念”、“补充知识”）并自动引用 `pic/` 目录下对应图片的完整 `.tex` 源码。
-5. 将这段代码拷贝到本地并保存为 `.tex` 文件（如 `lesson1.tex`）。此时，只要 `.tex` 文件与 `pic/` 目录同级即可顺利编译出 PDF。
+### Step 3: Generate LaTeX Notes with LLM
+1. Open an AI tool that supports document parsing in your browser (e.g., Gemini Advanced or ChatGPT).
+2. **Upload your PDF lecture file** in the chat interface.
+3. **Paste (Cmd+V / Ctrl+V)** the Prompt from your clipboard into the text input box and send it to the AI model.
+4. The model will return beautifully typeset, complete `.tex` source code based on the instructions, including custom components (like "Core Concepts", "Supplementary Knowledge") and automatically referencing the corresponding images in the `pic/` directory.
+5. Copy this code locally and save it as a `.tex` file (e.g., `lesson1.tex`). As long as the `.tex` file is in the same directory level as the `pic/` folder, you can compile it into a PDF smoothly.
 
-### 步骤 4：归档整理 (运行 `clean.sh`)
-当一节课的笔记生成、校验并保存好 `.tex` 文件之后，可直接使用清理脚本将本次处理的所有相关文件移动封装：
+### Step 4: Archive and Cleanup (Run `clean.sh`)
+Once the notes for a lecture are generated, verified, and the `.tex` file is saved, you can use the cleanup script directly to move and package all related files from this session:
 ```bash
-chmod +x clean.sh   # 第一次使用时可能需要赋予执行权限
-./clean.sh <新文件夹名称>
+chmod +x clean.sh   # You might need to grant execute permissions the first time you use it
+./clean.sh <new_folder_name>
 
-# 示例：
+# Example:
 ./clean.sh Lec_01_Intro
 ```
-运行后，脚本会自动创建 `Lec_01_Intro` 目录，并将 `pic/` 目录以及所有的 `.pdf`、`.txt`、`.tex` 文件统统归档进去。您的当前目录将变得干净，可以直接开始下一课时的生成准备。
+After running, the script will automatically create a `Lec_01_Intro` directory and archive the `pic/` directory as well as all `.pdf`, `.txt`, and `.tex` files into it. Your current directory will be clean and ready for preparing the generation of the next lecture.
