@@ -83,7 +83,7 @@ cp -R skills/bilibili-render-pdf ~/.codex/skills/
 | `magick` (ImageMagick) | ✓ | |
 | `whisper` (openai-whisper) | | ✓ |
 
-此外，运行 skill 的 coding agent 必须具备一定的读图能力。
+此外，运行 skill 的 coding agent 必须具备一定的读图能力，否则很难选择关键帧，很难做到图文align（即至少是一个还不错的 vlm model，ps. MiniMax 2.7 只是一个纯文本模型）。
 
 ## 适用场景
 
