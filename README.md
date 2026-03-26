@@ -1,3 +1,7 @@
+- todo
+  - 逻辑连贯，动机清晰；
+  - spwan subagent high detailed output
+
 # video-render-pdf skills
 
 这个仓库托管两个 Codex skill，用于将视频讲座转换为结构化的中文 LaTeX 讲义和最终 PDF。

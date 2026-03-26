@@ -160,6 +160,23 @@ Select figures by necessity and teaching value, not by an arbitrary quota or a b
 When locating candidate frames, bias strongly toward recall before precision.
 It is better to inspect too many nearby candidates first than to miss the one frame where the slide, formula, table, or diagram is finally fully revealed and readable.
 
+### Frame Selection Checklist
+
+Before inserting any video frame, first inspect several nearby candidates from the same subtitle-aligned interval and apply this checklist. If any item fails, reject the frame and keep searching nearby rather than forcing an approximate match.
+
+- Relevance: the frame must directly support the exact concept discussed in the surrounding paragraph or subsection, not just the same broad topic.
+- Required content visible: every visual element referenced in the text must already be visible in the frame.
+- Fully revealed state: when slides, whiteboards, animations, or dashboards build progressively, use the final fully populated readable state rather than an intermediate state.
+- Best nearby candidate: compare multiple nearby frames and prefer the one that is both most complete and most readable.
+- Readability: text, formulas, labels, and diagram structure must be legible enough to justify inclusion.
+
+### Frame Naming
+
+- Use neutral timestamp-based names for raw candidate frames. Do not assign semantic names before inspecting the actual frame content.
+- Rename a frame semantically only after visually confirming what is fully visible in the image.
+- The semantic filename must describe the frame's actual visible content, not a guess based on subtitles, nearby narration, or the intended paragraph topic.
+- If the frame is partially revealed, transitional, or ambiguous, keep searching and do not lock in a semantic name yet.
+
 - Use the timestamped subtitle file (CC or Whisper-generated SRT) as the primary locator for key-frame search.
 - First identify the subtitle span that corresponds to the concept, example, formula, or visual explanation being discussed.
 - Then search within that subtitle-aligned time interval, and slightly around its boundaries when needed, to find the best readable frame.
