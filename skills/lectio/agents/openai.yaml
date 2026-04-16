@@ -1,0 +1,2 @@
+name: Lectio
+description: The ultimate universal lecture note generator. Transforms PDF slides, raw text notes, and video URLs (YouTube/Bilibili) into professional Markdown and LaTeX/PDF讲义. Features VLM-based slide parsing, Whisper-backed speech-to-text, logical note reconstruction, and multi-format output (Markdown, LaTeX, Flashcards, Socratic Dialogue).
