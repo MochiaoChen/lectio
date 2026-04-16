@@ -1,4 +1,4 @@
-# Lectio (原 Video2Note)
+# Lectio 
 
 > **Lectio** (拉丁语：阅读/学习/解读) —— 打造学术级讲义的终极工具。
 > 将 PDF 幻灯片、零散笔记、YouTube/B站视频一键转化为结构化的 LaTeX 讲义与 Markdown 预览。
