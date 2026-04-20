@@ -100,7 +100,7 @@ bash skills/scripts/compile.sh notes.tex
 
 ## 鸣谢
 
-本项目缝合并改进了以下优秀仓库的思想：
+本项目参考了以下优秀仓库的思想：
 - [llm-note-generator](https://github.com/Stefan0219/llm-note-generator)
 - [wdkns-skills](https://github.com/wdkns/wdkns-skills)
 
