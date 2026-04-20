@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+
+% Basic packages
+\usepackage[fontset=fandol]{ctex}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[most]{tcolorbox}
+\usepackage{etoolbox}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{tikz}
+\IfFileExists{pgfplots.sty}{
+    \usepackage{pgfplots}
+    \pgfplotsset{compat=1.18}
+}{}
+
+% Highlight boxes
+\newtcolorbox{knowledgebox}[1]{
+    enhanced, colback=blue!5!white, colframe=blue!75!black, colbacktitle=blue!75!black,
+    coltitle=white, fonttitle=\bfseries, title=#1, attach boxed title to top left={yshift=-2mm, xshift=2mm},
+    boxrule=1pt, sharp corners
+}
+
+\newtcolorbox{importantbox}[1]{
+    enhanced, colback=yellow!10!white, colframe=yellow!80!black, colbacktitle=yellow!80!black,
+    coltitle=black, fonttitle=\bfseries, title=#1, sharp corners
+}
+
+\newtcolorbox{warningbox}[1]{
+    enhanced, colback=red!5!white, colframe=red!75!black, colbacktitle=red!75!black,
+    coltitle=white, fonttitle=\bfseries, title=#1, sharp corners
+}
+
+% Listings
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red!60!black},
+    commentstyle=\color{green!60!black},
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    captionpos=b,
+    extendedchars=false
+}
+
+% ============================================================
+%  Lectio 讲义模板 —— 使用说明（给 LLM 看）
+%  - 本模板是「参考骨架」，不是强制结构。根据输入材料的实际形态调整：
+%      · slides → notes：可按幻灯片章节切 section，省略 \sourceduration。
+%      · video  → notes：保留时长/链接，正文按时间线组织。
+%      · text   → notes：来源元数据可留空或删除整个 titlepage。
+%  - 必须保留：\usepackage 区块、tcolorbox 定义、compile.sh 编译方式。
+%  - 可以改：\newcommand 默认值、titlepage 排版、section 结构、是否要 TOC。
+%  - 无关字段请「删掉对应 \newcommand 与 titlepage 行」，而不是留 [在此填写...]。
+% ============================================================
+
+% Front-page metadata（用不到的字段可直接删除对应命令及 titlepage 中的引用）
+\newcommand{\notetitle}{课程讲义}
+\newcommand{\noteauthors}{Lectio}
+\newcommand{\notedate}{\today}
+\newcommand{\sourcechannel}{}
+\newcommand{\sourcepublishdate}{}
+\newcommand{\sourceduration}{}
+\newcommand{\sourceurl}{}
+\newcommand{\coverpath}{}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+{\Large 课程讲义\par}
+\vspace{1.2cm}
+{\huge\bfseries \notetitle\par}
+\vspace{0.8cm}
+{\large \noteauthors\par}
+\vspace{0.3cm}
+{\large \notedate\par}
+\vspace{1.2cm}
+
+\ifdefempty{\coverpath}{
+{\small 请在生成讲义时填入封面图的本地路径。\par}
+}{
+\includegraphics[width=0.82\textwidth,height=0.45\textheight,keepaspectratio]{\coverpath}\par
+}
+
+\vfill
+% 来源信息框：若对应字段为空会自动省略整行。
+% 纯 slides/text 输入可以整段删除这个 tcolorbox。
+\begin{tcolorbox}[width=0.9\textwidth, colback=black!2!white, colframe=black!60, sharp corners]
+\ifdefempty{\sourcechannel}{}{\textbf{来源/作者}：\sourcechannel\par}
+\ifdefempty{\sourcepublishdate}{}{\textbf{发布日期}：\sourcepublishdate\par}
+\ifdefempty{\sourceduration}{}{\textbf{时长/篇幅}：\sourceduration\par}
+\ifdefempty{\sourceurl}{}{\textbf{链接}：\href{\sourceurl}{\nolinkurl{\sourceurl}}\par}
+\end{tcolorbox}
+\end{titlepage}
+
+% 短讲义（< 5 页）可以把下面两行删掉。
+\tableofcontents
+\newpage
+
+%% --- 正文内容开始（以下 section 结构仅为示例，按实际材料组织即可） --- %%
+
+% 约束（硬性）：
+%   1) 图片放 \includegraphics，不要塞进 knowledgebox/importantbox/warningbox。
+%   2) slides 来源的图在同页加脚注「来源：Slide P.N」；视频帧则「来源：mm:ss」。
+%   3) 每个 \section 末尾放一个 importantbox 做费曼压缩（一句话版）。
+%   4) 全文末尾 \section*{思考题} 放 3–5 个开放问题。
+%
+% 自由度：章节数量/标题/是否分小节、是否用 knowledgebox、是否加附录，按内容决定。
+
+%% --- 正文内容结束 --- %%
+
+\end{document}
