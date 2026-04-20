@@ -106,4 +106,4 @@ bash skills/scripts/compile.sh notes.tex
 
 ## License
 
-MIT License. 详见根目录 `LICENSE`。
+GPL 3.0 License. 详见根目录 `LICENSE`。
