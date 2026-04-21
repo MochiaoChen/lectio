@@ -34,7 +34,7 @@ description: 将 PDF 幻灯片、零散笔记、YouTube/Bilibili 视频转成学
 
 ### 1.2 视频 URL
 1. **YouTube**：先尝试 `yt-dlp --write-auto-subs --sub-langs "zh.*,en.*" --skip-download`；拿到 CC 字幕优先。
-2. **Bilibili**：`yt-dlp` 拉取字幕；**若无字幕** → `yt-dlp -x --audio-format wav` 抽音轨 → `whisper <audio> --language zh --model medium`。
+2. **Bilibili**：先尝试 `yt-dlp --write-subs --write-auto-subs --sub-langs "zh.*,en.*" --skip-download` 拉字幕；若仍无可用字幕，按"无字幕资源"处理：`yt-dlp -x --audio-format wav` 抽音轨 → `whisper <audio> --model medium --task transcribe --word_timestamps True` 生成带时间戳转写。
 3. 同步下载封面：`yt-dlp --write-thumbnail --skip-download`，保存本地路径供 LaTeX `\coverpath` 使用。
 4. 在必要时对关键帧抽帧（`ffmpeg -vf fps=1/30`）给 VLM 识别公式/板书。
 
