@@ -10,7 +10,7 @@ Lectio 是一个面向 agent 运行时（🦞 opencode 等）的 **skill**，当
 | 模式 | 输入 | 关键动作 |
 |------|------|---------|
 | **slides → notes** | PDF 课件 / 讲义 | `pdftocairo` 逐页转图 → VLM 提取文字/公式/图表 → **展开**为成段解释（而非抄录关键词） |
-| **video → notes**  | YouTube URL / Bilibili BV 号 | `yt-dlp` 拉字幕；无字幕时 `whisper` 转写 → 按时间线组织 → 关键帧 VLM 识别板书/公式 |
+| **video → notes**  | YouTube URL / Bilibili BV 号 | `yt-dlp` 拉字幕；B站无字幕资源自动回退 `whisper`（带时间戳）转写 → 按时间线组织 → 关键帧 VLM 识别板书/公式 |
 | **text → notes**   | `.txt` / `.md` 零散笔记 | 识别口语腔与思维跳跃 → 补全推理链 → 书面学术语言 |
 
 三种输入**可以混用**：例如"视频 + 对应 slides PDF"会同时参考两种源，slides 作为结构骨架、视频作为讲解内容。
